@@ -1,10 +1,11 @@
 package task1;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CreditCalculatorTest {
     private CreditCalculator sut;
@@ -13,9 +14,9 @@ class CreditCalculatorTest {
     private int period;
 
 
-    @Before
+    @BeforeEach
     public void init() {
-        sut = null;
+        sut = new CreditCalculatorImpl();
         sumCredit = 100000;
         percent = 0.2;
         period = 12;
@@ -31,7 +32,7 @@ class CreditCalculatorTest {
     }
 
     @Test
-    // ArithmeticException
+    @DisplayName("Ошибка деления на ноль при расчете ежемечесного платежа")
     public void calculateMonthPaymentTest_err() {
         assertThrows(ArithmeticException.class, () -> sut.calculateMonthPayment(sumCredit, percent, 0));
     }
